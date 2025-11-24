@@ -11,14 +11,16 @@ Suryaprakash Murugavvel - smurugavvel1
 
 # A file/folder manifest to guide reading through the code
 ChatClient.py
-    1-3 Import necessary modules
-    5-9 Create variables needed for communication
+    1-5 Import necessary modules
+    7-12 Create variables needed for communication
 
     receive_messages() - Function for the client to receive messages from the server 
 
     connect_to_server() - After the user selects the IP and port, this function will connect to the user to the server
 
     send_json() - Sends JSON messages to server
+
+    color_text() -  Allows color customization of the user's terminal (ref. - https://www.geeksforgeeks.org/python/print-colors-python-terminal/)
 
     main() - Main function that executes when the program file is run. Prompts the user for the server IP, port number, and nickname for other users. Handles the client side of the IRC chat channel. 
 

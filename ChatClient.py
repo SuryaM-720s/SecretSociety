@@ -2,11 +2,14 @@ import socket
 import threading
 import json
 
+from colorama import Fore
+
 Server = None
 Port = None
 client_socket = None
 nickname = None
 connected = False
+color = None
 
 
 # Thread to receive messages from server
@@ -65,12 +68,26 @@ def send_json(data):
     except Exception as e:
         print(f"Error sending message: {e}")
 
+# Function to color text based on user choice
+def color_text(text, color):
+    color_map = {
+        "RED": Fore.RED,
+        "GREEN": Fore.GREEN,
+        "BLUE": Fore.BLUE,
+        "YELLOW": Fore.YELLOW,
+        "CYAN": Fore.CYAN,
+        "MAGENTA": Fore.MAGENTA,
+        "WHITE": Fore.WHITE
+    }
+    return color_map.get(color.upper(), Fore.WHITE) + text + Fore.RESET
+
 # Main function
 def main():
-    global nickname, connected
+    global nickname, connected, color
 
 # Get server details and nickname from user
-    server_ip = input("Enter server IP address: ")
+    color =  input("Choose your text color (RED, GREEN, BLUE, YELLOW, CYAN, MAGENTA, WHITE): ").upper()
+    server_ip = input(getattr(Fore, color, "") + "Enter server IP address: ")
     server_port = int(input("Enter server port: "))
     nickname = input("Enter your nickname: ")
 
@@ -120,13 +137,23 @@ Available commands:
 /leave [<channel>]
 /quit
 /help
+/color <color>
                 """)
-
+            #/color command
+            elif msg.startswith("/color"):
+                parts = msg.split(maxsplit=1)
+                if len(parts) == 2:
+                    color = parts[1].upper()
+                    print(color_text("Text color changed.", color))
+                    print(getattr(Fore, color, ""))
+                else:
+                    print("Usage: /color <color>")
             else:
                 # Normal chat message
                 send_json({"type": "message", "message": msg})
 # Cleanup on exit
         client_socket.close()
+        print(Fore.WHITE)
         print("Disconnected from server.")
 
 
