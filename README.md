@@ -25,6 +25,7 @@ ChatClient.py
     main() - Main function that executes when the program file is run. Prompts the user for the server IP, port number, and nickname for other users. Handles the client side of the IRC chat channel. 
 
 ChatServer.py
+
     1-7 Import necessary modules 
     9-13 Declare variables and amount of threads for communication
 
@@ -67,9 +68,17 @@ Overall, we first started testing with ensuring the basic functionalities worked
 
 Jennifer Barrera Vargas - jbarreravargas1
     1
+
+
 Jairo Gonzalez-Fragoso - jgonzalez68
     2
+
+
 Roshan Savarimuthu - rsavarimuthu1
     3
+
+
 Suryaprakash Murugavvel - smurugavvel1
     4
+
+
