@@ -152,8 +152,8 @@ Available commands:
                 # Normal chat message
                 send_json({"type": "message", "message": msg})
 
-    else:
-        print(Fore.WHITE)
+        else:
+            print(Fore.WHITE)
 
 # Cleanup on exit
         client_socket.close()
