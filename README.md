@@ -1,84 +1,199 @@
 # SecretSociety
 
-# Names/IDs of group members
-Jennifer Barrera Vargas - jbarreravargas1
-Jairo Gonzalez-Fragoso - jgonzalez68
-Roshan Savarimuthu - rsavarimuthu1
-Suryaprakash Murugavvel - smurugavvel1
+A multi-threaded chat server and client implementation inspired by Internet Relay Chat (IRC) principles, supporting multiple channels and concurrent client connections, built with Python for seamless cross-platform communication.
 
-# Web link to demonstration video
-------
+This project was completed as the Team Project Group Chat Service for the CSC 3320 System-Level Programming course at Georgia State University.
 
-# A file/folder manifest to guide reading through the code
-ChatClient.py
-    1-5 Import necessary modules
-    7-12 Create variables needed for communication
+**Demo**: 
 
-    receive_messages() - Function for the client to receive messages from the server 
+---
 
-    connect_to_server() - After the user selects the IP and port, this function will connect to the user to the server
+## Features
 
-    send_json() - Sends JSON messages to server
+- **Multi-Channel Support**: Create and join multiple chat channels simultaneously, enabling organized group conversations.
+- **Multi-Threaded Architecture**: Handles up to four concurrent client connections using threading for responsive, real-time communication.
+- **IRC-Inspired Commands**: Familiar command-line interface with standard IRC commands like `/join`, `/leave`, `/nick`, and `/list`.
+- **Object-Based Protocol**: All client-server communication uses JSON-based objects for structured, reliable message passing.
+- **Automatic Idle Shutdown**: Server gracefully shuts down after 3 minutes of inactivity to conserve resources.
+- **Graceful Shutdown**: Supports Ctrl+C for clean server termination with proper client disconnection handling.
+- **Colored Terminal Output**: Enhanced user experience with customizable terminal colors for better message differentiation.
+- **Activity Logging**: Comprehensive server-side logging of all user actions and events for debugging and monitoring.
 
-    color_text() -  Allows color customization of the user's terminal (ref. - https://www.geeksforgeeks.org/python/print-colors-python-terminal/)
+## Demo
 
-    main() - Main function that executes when the program file is run. Prompts the user for the server IP, port number, and nickname for other users. Handles the client side of the IRC chat channel. 
+To see the full application lifecycle—from server startup to multi-client interaction—here are the key demonstration points:
 
-ChatServer.py
+### Server Initialization
+The server starts with configurable port and debug level settings, ready to accept client connections.
 
-    1-7 Import necessary modules 
-    9-13 Declare variables and amount of threads for communication
+### Multi-Client Connection
+Multiple clients successfully connect to the server and join different channels, demonstrating concurrent connection handling.
 
-    handle_client() - Function necessary to broadcast messages to other users within the same channel. Also outlines errors and having a client disconnect.
+### Real-Time Chat
+Messages are broadcast in real time to all users in the same channel, demonstrating multi-threaded message handling.
 
-    process_command() - Server will accept user commands and respond with the correct action 
+### Channel Management
+Users can create new channels, switch between channels, and see active channel listings with user counts.
 
-    join_channel() - Creates channels and broadcasts user join messages to other users in the channel 
+## Prerequisites
 
-    leave_channel() - Allows users to leave a channel and broadcast a message to other users in the channel when a user leaves
+This project requires Python 3.6 or higher, with the standard library supporting socket programming and threading.
 
-    broadcast_message() - Allows messages to be broadcast to clients in the same channel
+| Component | Requirement | Notes |
+|-----------|-------------|-------|
+| Python | 3.6 or higher | Must support socket and threading modules |
+| Network | Local network or localhost | For client-server communication |
+| Terminal | ANSI color support (optional) | For colored terminal output feature |
 
-    send_to_client() - Function to allow a message to be sent to a specific client
+## Project Structure
 
-    disconnect_client() - Function to disconnect a client from the server
+```
+SecretSociety/
+├── ChatServer.py           # Multi-threaded server implementation
+├── ChatClient.py           # Interactive chat client
+└── README.md              # Project documentation
+```
 
-    remove_client() - Function to remove a client from a specific channel
+### ChatServer.py
 
-    shutdown_if_idle() - Function that handles inactive servers by shutting down the server if no activity is detected within 180 seconds or 3 minutes. 
+The server handles all client connections, channel management, and message broadcasting.
 
-    graceful_shutdown() - Once Ctrl + C is pressed, the server will be shut down and disconnnect clients.
+**Key Components:**
+- `handle_client()`: Manages individual client connections and message routing
+- `process_command()`: Parses and executes IRC-style commands
+- `join_channel()`: Handles channel creation and user join events
+- `leave_channel()`: Manages user departure from channels
+- `broadcast_message()`: Sends messages to all users in a channel
+- `shutdown_if_idle()`: Monitors server activity and handles automatic shutdown
+- `graceful_shutdown()`: Ensures clean termination of all connections
+- `main()`: Entry point handling argument parsing and server initialization
 
-    main() - Main function that executes once the program file is run. Allows a specific port to be chosen and will log user actions. 
+### ChatClient.py
+
+The client provides an interactive terminal interface for connecting to the server and participating in chat channels.
+
+**Key Components:**
+- `receive_messages()`: Continuously listens for incoming server messages
+- `connect_to_server()`: Establishes a connection to the specified server
+- `send_json()`: Serializes and transmits JSON messages to the server
+- `color_text()`: Applies ANSI color codes to terminal output (ref: [GeeksforGeeks](https://www.geeksforgeeks.org/python/print-colors-python-terminal/))
+- `main()`: Handles user input, command processing, and client lifecycle
+
+## Building and Running
+
+### Starting the Server
+
+Open a terminal and navigate to the project directory:
+
+```bash
+# Run with default port (5555) and minimal logging
+python ChatServer.py
+
+# Run with custom port
+python ChatServer.py -p 8080
+
+# Run with full debug logging
+python ChatServer.py -p 5555 -d 1
+```
+
+**Command-Line Arguments:**
+- `-p <port>`: Specify server port number (default: 5555)
+- `-d <level>`: Set debug level (0 = errors only, 1 = all events)
+
+### Connecting Clients
+
+In separate terminal windows, start as many clients as needed:
+
+```bash
+python ChatClient.py
+```
+
+Upon execution, you'll be prompted for:
+1. **Server IP Address**: Enter the server's IP (use `localhost` or `127.0.0.1` for local testing)
+2. **Port Number**: Must match the server's port
+3. **Nickname**: Your display name (should be unique)
+
+### Available Commands
+
+Once connected, you can use the following IRC-style commands:
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/connect <server> [port]` | Connect to a chat server | `/connect 127.0.0.1 5555` |
+| `/nick <nickname>` | Set or change your nickname | `/nick Alice` |
+| `/list` | Display all channels and user counts | `/list` |
+| `/join <channel>` | Join or create a channel | `/join #general` |
+| `/leave [channel]` | Leave current or specified channel | `/leave` or `/leave #general` |
+| `/quit` | Disconnect from server and exit | `/quit` |
+| `/help` | Display command reference | `/help` |
+
+Any text that doesn't start with `/` is treated as a message and broadcast to your current channel.
+
+## Testing Methodology
+
+Our testing approach followed a progressive validation strategy:
+
+### Phase 1: Basic Functionality
+We verified core operations, including command execution, message sending, channel joining/leaving, and nickname changes. Each command was tested individually to ensure proper server responses and state updates.
+
+### Phase 2: Configuration Testing
+We validated custom port selection, verified client connectivity to non-default ports, and tested debug logging levels to ensure proper server configuration handling.
+
+### Phase 3: Stress and Edge Cases
+We pushed the system to its limits by:
+- Connecting the maximum number of clients (4 concurrent threads)
+- Testing rapid channel switching and message flooding
+- Attempting duplicate server instances on the same port
+- Verifying idle timeout functionality (3-minute inactivity)
+- Testing graceful shutdown with active connections
+
+### Phase 4: Multi-User Scenarios
+We simulated real-world usage with multiple clients in different channels, verifying message isolation, proper broadcasting, and concurrent operation stability.
+
+## Development Process & Team Roles
+
+This project was a collaborative effort with well-defined responsibilities:
+
+### Team Members
+
+1. **Jennifer Barrera Vargas** (jbarreravargas1)
+
+2. **Jairo Gonzalez-Fragoso** (jgonzalez68)
+
+3. **Roshan Savarimuthu** (rsavarimuthu1)
+
+4. **Suryaprakash Murugavvel** (smurugavvel1)
+   
+
+### Development Approach
+
+We followed an iterative development model, building complexity in stages:
+
+1. **Single-Channel, Single-Threaded Server**: Established basic client-server communication
+2. **Multi-Channel, Single-Threaded Server**: Added channel management without concurrency
+3. **Multi-Channel, Multi-Threaded Server**: Implemented threading for concurrent client handling (max 4 threads)
+
+This staged approach allowed us to validate each feature layer before adding complexity, resulting in a stable and maintainable codebase.
+
+## Observations & Reflections
+
+### Technical Insights
+- **Threading Challenges**: Managing shared state between threads required careful synchronization to prevent race conditions, particularly in the broadcast messaging system.
+- **JSON Protocol**: The object-based protocol proved more maintainable than raw text parsing, with a clear structure for both commands and events.
+- **Idle Detection**: Implementing the 3-minute idle timeout required careful tracking of all connection activity timestamps.
 
 
+### Future Enhancements
+If we were to extend this project, we would consider:
+- Private messaging between users
+- File sharing capabilities
+- Encryption for secure communication
 
+## Acknowledgments
 
-# Running the server/clients
+- IRC Protocol specification: [RFC 1459](http://tools.ietf.org/html/rfc1459.html)
+- Python terminal colors reference: [GeeksforGeeks](https://www.geeksforgeeks.org/python/print-colors-python-terminal/)
 
-The first step is to start the server. This can be done by opening a terminal and running "python ChatServer.py" (provided you are in the correct directory). By default, the server will choose port 5555 but with the addition of -p <port #>, a specific port can be chosen. With the server running, clients can now be started by opening another terminal and running "python ChatClient.py". Upon execution, prompts to enter the server's IP address, port number, and nickname will show up for the user. After successfully entering in the details, the user can use commands to join/leave a channel, change nickname, list all channels, and more. The server will shut down after no activity has been detected for 3 minutes or Ctrl + C is executed. All clients will be disconnected once either process happens. 
+---
 
-# Testing
-
-Testing was done by first doing normal operations. We used basic commands and ensured that leaving, joining, and other functions worked as intended. After, we decided to test more niche features like choosing a different port number and whether clients could connect as intended. Next, we moved to testing the limits of the program like how many clients could be handled and what happens if another server is opened on the same port.
-
-Overall, we first started testing with ensuring the basic functionalities worked before moving onto more niche and extreme cases. 
-
-# Roles of each group member 
-
-Jennifer Barrera Vargas - jbarreravargas1
-    1
-
-
-Jairo Gonzalez-Fragoso - jgonzalez68
-    2
-
-
-Roshan Savarimuthu - rsavarimuthu1
-    3
-
-
-Suryaprakash Murugavvel - smurugavvel1
-    4
-
-
+*This project demonstrates practical application of socket programming, multi-threading, and network protocol design principles in a real-world chat system implementation.*
