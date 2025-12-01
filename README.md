@@ -4,7 +4,8 @@ A multi-threaded chat server and client implementation inspired by Internet Rela
 
 This project was completed as the Team Project Group Chat Service for the CSC 4220 Computer Networks course at Georgia State University.
 
-**Demo**: 
+
+**Watch the Demo**: [Project  Demo Video](https://github.com/user-attachments/assets/40b790b8-c3e8-40ae-abde-3b9d279f3018)
 
 ---
 
