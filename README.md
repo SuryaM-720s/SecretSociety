@@ -155,16 +155,27 @@ We simulated real-world usage with multiple clients in different channels, verif
 
 This project was a collaborative effort with well-defined responsibilities:
 
-### Team Members
+### Team Member
 
-1. **Jennifer Barrera Vargas** (jbarreravargas1)
+**Jennifer Barrera Vargas** (jbarreravargas1)
+- Client-side message handling and user interface
+- Color terminal implementation and user experience enhancements
+- Testing and validation of client-side functionality
 
-2. **Jairo Gonzalez-Fragoso** (jgonzalez68)
+**Jairo Gonzalez-Fragoso** (jgonzalez68)
+- Server architecture and multi-threading implementation
+- Channel management and message broadcasting logic
+- Network protocol design and optimization
 
-3. **Roshan Savarimuthu** (rsavarimuthu1)
+**Roshan Savarimuthu** (rsavarimuthu1)
+- JSON object protocol design and implementation
+- Testing framework and stress testing procedures
+- Documentation and code organization
 
-4. **Suryaprakash Murugavvel** (smurugavvel1)
-   
+**Suryaprakash Murugavvel** (smurugavvel1)
+- Command processing and server-side logic
+- Logging system and graceful shutdown implementation
+- Integration testing and debugging
 
 ### Development Approach
 
