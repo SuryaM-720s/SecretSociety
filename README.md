@@ -1,4 +1,4 @@
-# SecretSociety
+# SecretSociety/Team12
 
 A multi-threaded chat server and client implementation inspired by Internet Relay Chat (IRC) principles, supporting multiple channels and concurrent client connections, built with Python for seamless cross-platform communication.
 
