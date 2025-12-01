@@ -2,7 +2,7 @@
 
 A multi-threaded chat server and client implementation inspired by Internet Relay Chat (IRC) principles, supporting multiple channels and concurrent client connections, built with Python for seamless cross-platform communication.
 
-This project was completed as the Team Project Group Chat Service for the CSC 3320 System-Level Programming course at Georgia State University.
+This project was completed as the Team Project Group Chat Service for the CSC 4220 Computer Networks course at Georgia State University.
 
 **Demo**: 
 
