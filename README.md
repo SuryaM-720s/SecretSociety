@@ -12,7 +12,7 @@ This project was completed as the Team Project Group Chat Service for the CSC 42
 ## Features
 
 - **Multi-Channel Support**: Create and join multiple chat channels simultaneously, enabling organized group conversations.
-- **Multi-Threaded Architecture**: Handles up to four concurrent client connections using threading for responsive, real-time communication.
+- **Multi-Threaded Architecture**: Handles up to 100 concurrent client connections using threading for responsive, real-time communication.
 - **IRC-Inspired Commands**: Familiar command-line interface with standard IRC commands like `/join`, `/leave`, `/nick`, and `/list`.
 - **Object-Based Protocol**: All client-server communication uses JSON-based objects for structured, reliable message passing.
 - **Automatic Idle Shutdown**: Server gracefully shuts down after 3 minutes of inactivity to conserve resources.
