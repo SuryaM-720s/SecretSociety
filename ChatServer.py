@@ -9,7 +9,7 @@ import signal
 clients = {}
 channels = {}
 last_activity = time.time()
-max_threads = 4
+max_threads = 100
 active_threads = 0
 
 
